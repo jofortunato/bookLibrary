@@ -1,0 +1,43 @@
+h1 {
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 20px 40px;
+  padding: 10px 30px;
+  border-bottom: 1px solid black;
+}
+
+div#icon-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  max-width: 250px;
+}
+
+button#new-book {
+  max-width: 100px;
+  height: 30px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+div#cards-grid {
+  display: grid;
+  margin: 40px 40px;
+  padding: 0px 30px;
+}
+
+h2#lib-empty {
+  text-align: center;
+}
