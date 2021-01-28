@@ -1,9 +1,22 @@
+:root {
+  --light-yellow: #f4d59a;
+  --orange: #de8626;
+  --light-red: #c93d21;
+  --red: #8e1a02;
+}
+
+body {
+  background-color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
 h1 {
-  font-size: 50px;
+  font-size: 20px;
 }
 
 h2 {
-  font-size: 32px;
+  font-size: 14px;
 }
 
 nav {
@@ -13,7 +26,7 @@ nav {
   align-items: baseline;
   margin: 20px 40px;
   padding: 10px 30px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--red);
 }
 
 div#icon-title {
@@ -25,19 +38,92 @@ div#icon-title {
   max-width: 250px;
 }
 
+span#app-title {
+  font-size: 50px;
+  color: var(--red);
+}
+
 button#new-book {
-  max-width: 100px;
-  height: 30px;
+  padding: 10px 16px;
   font-size: 12px;
   border-radius: 4px;
+  border: none;
+  background-color: var(--orange);
+  color: var(--red);
+}
+
+button#new-book:hover {
+  transform: scale(1.02);
+}
+
+button#new-book:focus {
+  outline: none;
 }
 
 div#cards-grid {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   margin: 40px 40px;
   padding: 0px 30px;
 }
 
-h2#lib-empty {
-  text-align: center;
+p#lib-empty {
+  font-size: 32px;
+  font-weight: 100;
+  color: var(--red);
+  margin: 0 auto;
+}
+
+div.book-card {
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+  background-color: var(--light-yellow);
+  margin: 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div.card-header {
+  width: 100%;
+  height: 24px;
+}
+
+button.delete-book {
+  float: right;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z' fill='rgba(201,61,33,1)'/%3E%3C/svg%3E");
+}
+
+button.delete-book:hover {
+  transform: scale(1.05);
+}
+
+button.delete-book:focus {
+  outline: none;
+}
+
+h1.book-title {
+  width: 80%;
+  margin: 8px 0px;
+}
+
+p.book-author {
+  margin: 16px 0px;
+}
+
+div.book-progress {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
