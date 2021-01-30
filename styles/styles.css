@@ -1,12 +1,14 @@
 :root {
-  --light-yellow: #f4d59a;
-  --orange: #de8626;
-  --light-red: #c93d21;
-  --red: #8e1a02;
+  --background: #e9ecef;
+  --dark-background: #19191c;
+  --title-color: #212529;
+  --card-color: #f8f9fa;
+  --detail1-color: #f4d59a;
+  --detail2-color: #8e1a02;
 }
 
 body {
-  background-color: var(--white);
+  background-color: var(--background);
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
@@ -23,37 +25,39 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   margin: 20px 40px;
   padding: 10px 30px;
-  border-bottom: 1px solid var(--red);
+  border-bottom: 1px solid var(--title-color);
 }
 
 div#icon-title {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   width: 20%;
-  max-width: 250px;
+  max-width: 156px;
 }
 
 span#app-title {
-  font-size: 50px;
-  color: var(--red);
+  font-size: 32px;
+  color: var(--title-color);
 }
 
 button#new-book {
-  padding: 10px 16px;
-  font-size: 12px;
+  padding: 8px 16px;
+  font-size: 14px;
   border-radius: 4px;
+  background-color: var(--detail1-color);
+  outline: none;
   border: none;
-  background-color: var(--orange);
-  color: var(--red);
+  color: var(--title-color);
 }
 
 button#new-book:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 
 button#new-book:focus {
@@ -72,25 +76,38 @@ div#cards-grid {
 p#lib-empty {
   font-size: 32px;
   font-weight: 100;
-  color: var(--red);
+  color: var(--detail2-color);
   margin: 0 auto;
 }
 
 div.book-card {
   width: 150px;
   height: 220px;
-  border-radius: 10px;
-  background-color: var(--light-yellow);
-  margin: 10px;
-  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--card-color);
+  margin: 16px;
+  /*padding: 8px 8px 16px 8px;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: var(--title-color);
+  box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.1);
+}
+
+div.book-card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 div.card-header {
   width: 100%;
-  height: 24px;
+  height: 40px;
+}
+
+div.book-card:hover div.card-header {
+  background-color: var(--detail1-color);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 button.delete-book {
@@ -102,10 +119,12 @@ button.delete-book {
   background-color: transparent;
   border: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z' fill='rgba(201,61,33,1)'/%3E%3C/svg%3E");
+  margin: 8px;
 }
 
 button.delete-book:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 button.delete-book:focus {
@@ -114,11 +133,12 @@ button.delete-book:focus {
 
 h1.book-title {
   width: 80%;
-  margin: 8px 0px;
+  margin: 8px 8px;
+  font-weight: bold;
 }
 
 p.book-author {
-  margin: 16px 0px;
+  margin: 16px 8px;
 }
 
 div.book-progress {
@@ -126,4 +146,76 @@ div.book-progress {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 8px;
+  font-size: 12px;
+}
+
+/* Adapted from: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp*/
+/* Customize the label (the container) */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.read-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: var(--background);
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .read-checkmark {
+  background-color: var(--detail1-color);
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .read-checkmark {
+  background-color: var(--detail1-color);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.read-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .read-checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .read-checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

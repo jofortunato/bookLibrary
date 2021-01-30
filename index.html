@@ -19,19 +19,19 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="50"
-            height="50"
+            width="32"
+            height="32"
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
               d="M21 4H7a2 2 0 1 0 0 4h14v13a1 1 0 0 1-1 1H7a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h13a1 1 0 0 1 1 1v1zM5 18a2 2 0 0 0 2 2h12V10H7a3.982 3.982 0 0 1-2-.535V18zM20 7H7a1 1 0 1 1 0-2h13v2z"
-              fill="rgba(142,26,2,1)"
+              fill="rgba(33,37,41,1)"
             />
           </svg>
         </div>
-        <span id="app-title">BookLIB</span>
+        <span id="app-title">BookLib</span>
       </div>
-      <button id="new-book">Add book</button>
+      <button id="new-book">+ New book</button>
     </nav>
     <div id="cards-grid">
       <!-- <p id="lib-empty">Library is Empty</p> -->
@@ -40,14 +40,18 @@
           <div class="card-header">
             <button class="delete-book"></button>
           </div>
-          <h1 class="book-title">TITLEEEEE EEEEEEEEEE EEEEEEEEE</h1>
-          <p class="book-author">AUTHOR</p>
+          <h1 class="book-title">Harry Potter and the Half-Blood Prince</h1>
+          <p class="book-author">J. K. Rowling</p>
         </div>
         <div class="book-progress">
           <div class="card-footer">
-            <span>Progress: </span><span class="progress-value">0%</span>
+            <span>Progress: </span><span class="progress-value">0</span
+            ><span>%</span>
           </div>
-          <input type="checkbox" class="read-status" />
+          <label class="checkbox-container">
+            <input type="checkbox" class="read-status" />
+            <span class="read-checkmark"></span>
+          </label>
         </div>
       </div>
       <div class="book-card"></div>
