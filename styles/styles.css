@@ -219,3 +219,37 @@ div.book-progress {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+@media screen and (max-width: 550px) {
+  nav {
+    margin: 20px 20px;
+  }
+
+  div#cards-grid {
+    margin: 40px 20px;
+    padding: 0 10px;
+  }
+
+  button#new-book span {
+    display: none;
+  }
+
+  button#new-book {
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  span#app-title {
+    display: none;
+  }
+
+  div#cards-grid {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
