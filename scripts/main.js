@@ -1,10 +1,14 @@
-let textBox = document.getElementById("test-key-event");
-let currentKey = "";
-let re = new RegExp("=");
+let myLibrary = [];
 
-document.addEventListener('keyup', (event) => {
-    if (re.test(event.key)) {
-        console.log(event.key);
-        textBox.textContent = textBox.textContent + event.key;
-    }
-}, false);
+function Book(title, author, pagesTotal, pagesRead) {
+  this.title = title;
+  this.author = author;
+  this.pagesTotal = pagesTotal;
+  this.pagesRead = pagesRead;
+}
+
+function addBookToLibrary(title, author, pagesTotal, pagesRead) {
+  newBook = new Book(title, author, pagesTotal, pagesRead);
+
+  myLibrary.push(newBook);
+}
