@@ -76,7 +76,7 @@ div#cards-grid {
 p#lib-empty {
   font-size: 32px;
   font-weight: 100;
-  color: var(--detail2-color);
+  color: var(--title-color);
   margin: 0 auto;
 }
 
