@@ -91,6 +91,61 @@ function loadLibrary() {
   }
 }
 
+function validateForm(titleValue, authorValue, pagesReadValue, pagesTotalValue) {
+  let isValid = true;  
+  let regexIntegerNumber = /^[0-9]*$/g;
+  
+  if (titleValue.replaceAll(" ", "").length === 0) {
+    titleFormInput.classList.add("not-valid");
+    titleFormLabel.classList.add("not-valid");
+    isValid = false;
+  }
+  else {
+    titleFormInput.classList.remove("not-valid");
+    titleFormLabel.classList.remove("not-valid");
+  }
+
+  if (authorValue.replaceAll(" ", "").length === 0) {
+    authorFormInput.classList.add("not-valid");
+    authorFormLabel.classList.add("not-valid");
+    isValid = false;
+  }
+  else {
+    authorFormInput.classList.remove("not-valid");
+    authorFormLabel.classList.remove("not-valid");
+  }
+
+  if (pagesTotalValue.match(regexIntegerNumber) === null) {
+    pagesTotalFormInput.classList.add("not-valid");
+    pagesTotalFormLabel.classList.add("not-valid");
+    isValid = false;
+  }
+  else {
+    pagesTotalFormInput.classList.remove("not-valid");
+    pagesTotalFormLabel.classList.remove("not-valid");
+  }
+
+  if (pagesReadValue.match(regexIntegerNumber) === null) {
+    pagesReadFormInput.classList.add("not-valid");
+    pagesReadFormLabel.classList.add("not-valid");
+    isValid = false;
+  }
+  else {
+    pagesReadFormInput.classList.remove("not-valid");
+    pagesReadFormLabel.classList.remove("not-valid");
+  }
+
+  if (parseInt(pagesReadValue) > parseInt(pagesTotalValue)) {
+    pagesReadFormInput.classList.add("not-valid");
+    pagesReadFormLabel.classList.add("not-valid");
+    pagesTotalFormInput.classList.add("not-valid");
+    pagesTotalFormLabel.classList.add("not-valid");
+    isValid = false;
+  }
+
+  return isValid
+}
+
 let myLibrary = [
   {
     title: "Harry Potter and the Half-Blood Prince",
@@ -137,9 +192,14 @@ const cancelFormBtn = document.getElementById("cancel-form");
 const bookFormContainer = document.getElementById("book-form");
 const bookForm = document.querySelector("#book-form form");
 const titleFormInput = document.getElementById("form-book-title");
+const titleFormLabel = document.querySelector("label[for=form-book-title]");
 const authorFormInput = document.getElementById("form-book-author");
+const authorFormLabel = document.querySelector("label[for=form-book-author]");
 const pagesReadFormInput = document.getElementById("form-book-pages-read");
+const pagesReadFormLabel = document.querySelector("label[for=form-book-pages-read]");
 const pagesTotalFormInput = document.getElementById("form-book-num-pages");
+const pagesTotalFormLabel = document.querySelector("label[for=form-book-num-pages]");
+
 
 
 newBookBtn.addEventListener("click", () => {
@@ -149,4 +209,15 @@ newBookBtn.addEventListener("click", () => {
 cancelFormBtn.addEventListener("click", () => {
   bookForm.reset();
   bookFormContainer.classList.add("display-none");
+});
+
+submitFormBtn.addEventListener("click", () => {
+  let isValid = validateForm(titleFormInput.value, authorFormInput.value, pagesReadFormInput.value, pagesTotalFormInput.value);
+  
+  if (isValid) {
+    
+
+    bookForm.reset();
+    bookFormContainer.classList.add("display-none");
+  }
 });
