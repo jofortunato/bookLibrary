@@ -91,7 +91,7 @@ function loadLibrary() {
   }
 }
 
-function validateForm(titleValue, authorValue, pagesReadValue, pagesTotalValue) {
+function validateForm(titleValue, authorValue, pagesTotalValue, pagesReadValue) {
   let isValid = true;  
   let regexIntegerNumber = /^[0-9]*$/g;
   
@@ -212,10 +212,21 @@ cancelFormBtn.addEventListener("click", () => {
 });
 
 submitFormBtn.addEventListener("click", () => {
-  let isValid = validateForm(titleFormInput.value, authorFormInput.value, pagesReadFormInput.value, pagesTotalFormInput.value);
+  let isValid = validateForm(titleFormInput.value, 
+    authorFormInput.value, 
+    pagesTotalFormInput.value, 
+    pagesReadFormInput.value);
   
   if (isValid) {
+    let bookProgress = 100* Math.round(parseInt(10* pagesReadFormInput.value)/parseInt(pagesTotalFormInput.value))/10;
+
+    addBookToLibrary(titleFormInput.value, 
+      authorFormInput.value, 
+      parseInt(pagesTotalFormInput.value), 
+      parseInt(pagesReadFormInput.value), 
+      bookProgress);
     
+    addCard(titleFormInput.value, authorFormInput.value, bookProgress)
 
     bookForm.reset();
     bookFormContainer.classList.add("display-none");
