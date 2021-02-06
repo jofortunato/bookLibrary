@@ -18,7 +18,7 @@ Part of my journey learning to create web apps. This part of the [The Odin Proje
 - [ ] Optional: Add dark theme;
 - [x] Write a constructor for making “Book” objects;
 - [x] Create a function to add books to an array;
-- [ ] Create a function that loops through the array and displays each book on the page as a card;
+- [x] Create a function that loops through the array and displays each book on the page as a card;
 - [ ] Add "New Book" button to the page that brings up a form allowing users to input the details for the new book: author, title, number of pages and whether it’s been read;
 - [ ] Add a button and the functionality to the book card to remove the book;
 - [ ] Add a checkbox and the functionality to the book card to chage the reading status;

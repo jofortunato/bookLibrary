@@ -1,5 +1,3 @@
-let myLibrary = [];
-
 function Book(title, author, pagesTotal, pagesRead, progressStatus) {
   this.title = title;
   this.author = author;
@@ -72,3 +70,63 @@ function addCard(title, author, progressStatus) {
   cardsGridContainer.appendChild(cardContainer);
 
 }
+
+function setEmptyLibrary() {
+  let emptyLibraryText = document.createElement("p");
+  emptyLibraryText.textContent = "Library is Empty";
+  emptyLibraryText.id = "lib-empty";
+
+  let cardsGridContainer = document.getElementById("cards-grid");
+  cardsGridContainer.appendChild(emptyLibraryText);
+}
+
+function loadLibrary() {
+  if (myLibrary.length === 0) {
+    setEmptyLibrary();
+  }
+  else {
+    for(let i = 0; i < myLibrary.length; ++i) {
+      addCard(myLibrary[i].title, myLibrary[i].author, myLibrary[i].progressStatus);
+    }
+  }
+}
+
+let myLibrary = [
+  {
+    title: "Harry Potter and the Half-Blood Prince",
+    author: "J. K. Rowling",
+    pagesTotal: 375,
+    pagesRead: 100,
+    progressStatus: 26.7
+    },
+  {
+    title: "Mrs. McGinty's Dead",
+    author: "Agatha Christie",
+    pagesTotal: 230,
+    pagesRead: 70,
+    progressStatus: 30.4
+  },
+  {
+    title: "Educated",
+    author: "	Tara Westover",
+    pagesTotal: 460,
+    pagesRead: 460,
+    progressStatus: 100 
+  },
+  {
+    title: "Sapiens: A Brief History of Humankind",
+    author: "Yuval Noah Harari",
+    pagesTotal: 500,
+    pagesRead: 500,
+    progressStatus: 100 
+  },
+  {
+    title: "Capitães da Areia",
+    author: "Jorge Amado",
+    pagesTotal: 250,
+    pagesRead: 210,
+    progressStatus: 84
+  }
+];
+
+loadLibrary();
