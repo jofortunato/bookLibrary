@@ -131,10 +131,10 @@ let myLibrary = [
 
 loadLibrary();
 
-const newBookBtn = document.querySelector("#new-book");
-const submitFormBtn = document.querySelector("#submit-form");
-const cancelFormBtn = document.querySelector("#cancel-form");
-const bookFormContainer = document.querySelector("#book-form");
+const newBookBtn = document.getElementById("new-book");
+const submitFormBtn = document.getElementById("submit-form");
+const cancelFormBtn = document.getElementById("cancel-form");
+const bookFormContainer = document.getElementById("book-form");
 const bookForm = document.querySelector("#book-form form");
 const titleFormInput = document.getElementById("form-book-title");
 const authorFormInput = document.getElementById("form-book-author");
