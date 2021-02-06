@@ -130,3 +130,11 @@ let myLibrary = [
 ];
 
 loadLibrary();
+
+const newBookBtn = document.querySelector("#new-book");
+
+
+newBookBtn.addEventListener("click", () => {
+  let bookForm = document.querySelector("#book-form");
+  bookForm.classList.remove("display-none");
+});
