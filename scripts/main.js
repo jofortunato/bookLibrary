@@ -135,7 +135,9 @@ function validateForm(titleValue, authorValue, pagesTotalValue, pagesReadValue) 
     pagesReadFormLabel.classList.remove("not-valid");
   }
 
-  if (parseInt(pagesReadValue) > parseInt(pagesTotalValue)) {
+  if ((pagesReadValue != "" && pagesTotalValue === "") || 
+  parseInt(pagesReadValue) > parseInt(pagesTotalValue)) {
+    
     pagesReadFormInput.classList.add("not-valid");
     pagesReadFormLabel.classList.add("not-valid");
     pagesTotalFormInput.classList.add("not-valid");
@@ -261,14 +263,38 @@ submitFormBtn.addEventListener("click", () => {
     pagesReadFormInput.value);
 
   if (isValid) {
-    let bookProgress = 100* Math.round(1000*parseInt(pagesReadFormInput.value)/parseInt(pagesTotalFormInput.value))/1000;
+    let bookProgress;
+    let pagesTotal;
+    let pagesRead;
+
+    if (pagesTotalFormInput.value === "") {
+      pagesTotal = null;
+    }
+    else {
+      pagesTotal = parseInt(pagesTotalFormInput.value);
+    }
+
+    if (pagesReadFormInput.value === "") {
+      pagesRead = null;
+    }
+    else {
+      pagesRead = parseInt(pagesReadFormInput.value);
+    }
+
+    if (pagesTotal === 0 || pagesTotal === null || pagesRead === null) {
+      bookProgress = 0;
+    }
+    else {
+      bookProgress = 100* Math.round(1000*parseInt(pagesReadFormInput.value)/parseInt(pagesTotalFormInput.value))/1000;
+    }
+
 
     if (isAddNewBook) {
 
       addBookToLibrary(titleFormInput.value, 
         authorFormInput.value, 
-        parseInt(pagesTotalFormInput.value), 
-        parseInt(pagesReadFormInput.value), 
+        pagesTotal, 
+        pagesRead, 
         bookProgress);
       
       if (myLibrary.length === 1) {
@@ -279,8 +305,8 @@ submitFormBtn.addEventListener("click", () => {
     else {
       updateLibrary(titleFormInput.value, 
         authorFormInput.value, 
-        pagesTotalFormInput.value, 
-        pagesReadFormInput.value, 
+        pagesTotal, 
+        pagesRead, 
         bookProgress);
 
       updateCard(titleFormInput.value,
