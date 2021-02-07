@@ -298,12 +298,33 @@ cardsGridContainer.addEventListener("click", e => {
   let bookCard = e.target.closest(".book-card");
   let bookIndex = parseInt(bookCard.getAttribute("data-book-index"));
 
+  let checkboxContainer = e.target.closest(".checkbox-container");
+
   if (e.target.classList.contains("delete-book")) {
     deleteBook(bookIndex);
   }
-  /*If e.target = read checkbox => ...*/
-  /*Else: */
-  else {
+  else if (e.target.classList.contains("read-status")) {
+
+    if (myLibrary[bookIndex].progressStatus < 100) {
+      myLibrary[bookIndex].progressStatus = 100;
+
+      if (myLibrary[bookIndex].pagesTotal != null) {
+        myLibrary[bookIndex].pagesRead = myLibrary[bookIndex].pagesTotal;
+      }
+    }
+    else {
+      myLibrary[bookIndex].progressStatus = 0;
+
+      if (myLibrary[bookIndex].pagesRead != null) {
+        myLibrary[bookIndex].pagesRead = 0;
+      }
+    }
+
+    let cardProgressValue = bookCard.querySelector(".progress-value");
+    cardProgressValue.textContent = myLibrary[bookIndex].progressStatus;
+
+  }
+  else if (checkboxContainer === null){
     titleFormInput.value = myLibrary[bookIndex].title;
     authorFormInput.value = myLibrary[bookIndex].author;
     pagesReadFormInput.value = myLibrary[bookIndex].pagesRead;
