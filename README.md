@@ -22,6 +22,7 @@ Part of my journey learning to create web apps. This part of the [The Odin Proje
 - [x] Add "New Book" button to the page that brings up a form allowing users to input the details for the new book: author, title, number of pages and whether it’s been read;
 - [x] Add a button and the functionality to the book card to remove the book;
 - [x] Add a checkbox and the functionality to the book card to change the reading status;
+- [x] Add localStorage feature;
 - [ ] Use Firebase as a persistant online database.
 
 ## Bugs, Advices and Lessons Learned
