@@ -12,9 +12,10 @@ function addBookToLibrary(title, author, pagesTotal, pagesRead, progressStatus) 
   myLibrary.push(newBook);
 }
 
-function addCard(title, author, progressStatus) {
+function addCard(title, author, progressStatus, arrayIndex) {
   let cardContainer = document.createElement("div");
   cardContainer.classList.add("book-card");
+  cardContainer.setAttribute("data-book-index", arrayIndex);
 
   let cardUpperContainer = document.createElement("div");
   cardUpperContainer.classList.add("card-upper");
@@ -76,7 +77,6 @@ function setEmptyLibrary() {
   emptyLibraryText.textContent = "Library is Empty";
   emptyLibraryText.id = "lib-empty";
 
-  let cardsGridContainer = document.getElementById("cards-grid");
   cardsGridContainer.appendChild(emptyLibraryText);
 }
 
@@ -86,7 +86,7 @@ function loadLibrary() {
   }
   else {
     for(let i = 0; i < myLibrary.length; ++i) {
-      addCard(myLibrary[i].title, myLibrary[i].author, myLibrary[i].progressStatus);
+      addCard(myLibrary[i].title, myLibrary[i].author, myLibrary[i].progressStatus, i);
     }
   }
 }
@@ -199,6 +199,7 @@ const pagesReadFormInput = document.getElementById("form-book-pages-read");
 const pagesReadFormLabel = document.querySelector("label[for=form-book-pages-read]");
 const pagesTotalFormInput = document.getElementById("form-book-num-pages");
 const pagesTotalFormLabel = document.querySelector("label[for=form-book-num-pages]");
+const cardsGridContainer = document.getElementById("cards-grid");
 
 
 
@@ -226,7 +227,7 @@ submitFormBtn.addEventListener("click", () => {
       parseInt(pagesReadFormInput.value), 
       bookProgress);
     
-    addCard(titleFormInput.value, authorFormInput.value, bookProgress)
+    addCard(titleFormInput.value, authorFormInput.value, bookProgress, myLibrary.length-1)
 
     bookForm.reset();
     bookFormContainer.classList.add("display-none");
