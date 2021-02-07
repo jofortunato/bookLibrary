@@ -173,6 +173,16 @@ function updateCard(title, author, progress) {
   }
 }
 
+function deleteBook(index) {
+  myLibrary = myLibrary.slice(0, index).concat(myLibrary.slice(index+1));
+  
+  removeElements(document.querySelectorAll(".book-card"));
+  
+  loadLibrary();
+}
+
+const removeElements = (elements) => elements.forEach(el => el.remove());
+
 let myLibrary = [
   {
     title: "Harry Potter and the Half-Blood Prince",
@@ -282,17 +292,21 @@ submitFormBtn.addEventListener("click", () => {
 });
 
 cardsGridContainer.addEventListener("click", e => {
-  /*If e.target = delete btn => ...*/
-  /*If e.target = read checkbox => ...*/
-  /*Else: */
   let bookCard = e.target.closest(".book-card");
   let bookIndex = parseInt(bookCard.getAttribute("data-book-index"));
-  
-  titleFormInput.value = myLibrary[bookIndex].title;
-  authorFormInput.value = myLibrary[bookIndex].author;
-  pagesReadFormInput.value = myLibrary[bookIndex].pagesRead;
-  pagesTotalFormInput.value = myLibrary[bookIndex].pagesTotal;
+  /*If e.target = delete btn => ...*/
+  if (e.target.classList.contains("delete-book")) {
+    deleteBook(bookIndex);
+  }
+  /*If e.target = read checkbox => ...*/
+  /*Else: */
+  else {
+    titleFormInput.value = myLibrary[bookIndex].title;
+    authorFormInput.value = myLibrary[bookIndex].author;
+    pagesReadFormInput.value = myLibrary[bookIndex].pagesRead;
+    pagesTotalFormInput.value = myLibrary[bookIndex].pagesTotal;
 
-  bookFormContainer.classList.remove("display-none");
-  indexBookBeingEdited = bookIndex;
+    bookFormContainer.classList.remove("display-none");
+    indexBookBeingEdited = bookIndex;
+  }
 },true)
