@@ -10,6 +10,7 @@ function addBookToLibrary(title, author, pagesTotal, pagesRead, progressStatus) 
   let newBook = new Book(title, author, pagesTotal, pagesRead, progressStatus);
 
   myLibrary.push(newBook);
+  setData();
 }
 
 function addCard(title, author, progressStatus, arrayIndex) {
@@ -81,6 +82,7 @@ function setEmptyLibrary() {
 }
 
 function loadLibrary() {
+  getData();
   if (myLibrary.length === 0) {
     setEmptyLibrary();
   }
@@ -154,6 +156,8 @@ function updateLibrary(title, author, pagesTotal, pagesRead, progress) {
   myLibrary[indexBookBeingEdited].pagesTotal = pagesTotal;
   myLibrary[indexBookBeingEdited].pagesRead = pagesRead;
   myLibrary[indexBookBeingEdited].progressStatus = progress;
+
+  setData();
 }
 
 function updateCard(title, author, progress) {
@@ -180,53 +184,24 @@ function deleteBook(index) {
   
   removeElements(document.querySelectorAll(".book-card"));
   
+  setData();
   loadLibrary();
 }
 
 const removeElements = (elements) => elements.forEach(el => el.remove());
 
-let myLibrary = [
-  {
-    title: "Harry Potter and the Half-Blood Prince",
-    author: "J. K. Rowling",
-    pagesTotal: 375,
-    pagesRead: 100,
-    progressStatus: 26.7
-    },
-  {
-    title: "Mrs. McGinty's Dead",
-    author: "Agatha Christie",
-    pagesTotal: 230,
-    pagesRead: 70,
-    progressStatus: 30.4
-  },
-  {
-    title: "Educated",
-    author: "Tara Westover",
-    pagesTotal: 460,
-    pagesRead: 460,
-    progressStatus: 100 
-  },
-  {
-    title: "Sapiens: A Brief History of Humankind",
-    author: "Yuval Noah Harari",
-    pagesTotal: 500,
-    pagesRead: 500,
-    progressStatus: 100 
-  },
-  {
-    title: "Capitães da Areia",
-    author: "Jorge Amado",
-    pagesTotal: 250,
-    pagesRead: 210,
-    progressStatus: 84
-  }
-];
+function setData() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
 
+function getData() {
+  let localStorageString = localStorage.getItem("myLibrary") || "[]";
+  myLibrary = JSON.parse(localStorageString);
+}
+
+let myLibrary = [];
 let isAddNewBook = false;
 let indexBookBeingEdited = null;
-
-loadLibrary();
 
 const newBookBtn = document.getElementById("new-book");
 const submitFormBtn = document.getElementById("submit-form");
@@ -243,7 +218,7 @@ const pagesTotalFormInput = document.getElementById("form-book-num-pages");
 const pagesTotalFormLabel = document.querySelector("label[for=form-book-num-pages]");
 const cardsGridContainer = document.getElementById("cards-grid");
 
-
+loadLibrary();
 
 newBookBtn.addEventListener("click", () => {
   bookFormContainer.classList.remove("display-none");
