@@ -146,6 +146,33 @@ function validateForm(titleValue, authorValue, pagesTotalValue, pagesReadValue) 
   return isValid
 }
 
+function updateLibrary(title, author, pagesTotal, pagesRead, progress) {
+  myLibrary[indexBookBeingEdited].title = title;
+  myLibrary[indexBookBeingEdited].author = author;
+  myLibrary[indexBookBeingEdited].pagesTotal = pagesTotal;
+  myLibrary[indexBookBeingEdited].pagesRead = pagesRead;
+  myLibrary[indexBookBeingEdited].progressStatus = progress;
+}
+
+function updateCard(title, author, progress) {
+  let bookCardToUpdate = document.querySelector(`div[data-book-index="${indexBookBeingEdited}"]`);
+  let bookTitle = bookCardToUpdate.querySelector("h1.book-title");
+  let bookAuthor = bookCardToUpdate.querySelector("p.book-author");
+  let bookProgress = bookCardToUpdate.querySelector("span.progress-value");
+  let progressCheckbox = bookCardToUpdate.querySelector("input.read-status");
+
+  bookTitle.textContent = title;
+  bookAuthor.textContent = author;
+  bookProgress.textContent = progress;
+
+  if (progress === 100) {
+    progressCheckbox.checked = true;
+  }
+  else {
+    progressCheckbox.checked = false;
+  }
+}
+
 let myLibrary = [
   {
     title: "Harry Potter and the Half-Blood Prince",
@@ -163,7 +190,7 @@ let myLibrary = [
   },
   {
     title: "Educated",
-    author: "	Tara Westover",
+    author: "Tara Westover",
     pagesTotal: 460,
     pagesRead: 460,
     progressStatus: 100 
@@ -183,6 +210,9 @@ let myLibrary = [
     progressStatus: 84
   }
 ];
+
+let isAddNewBook = false;
+let indexBookBeingEdited = null;
 
 loadLibrary();
 
@@ -205,11 +235,13 @@ const cardsGridContainer = document.getElementById("cards-grid");
 
 newBookBtn.addEventListener("click", () => {
   bookFormContainer.classList.remove("display-none");
+  isAddNewBook = true;
 });
 
 cancelFormBtn.addEventListener("click", () => {
   bookForm.reset();
   bookFormContainer.classList.add("display-none");
+  isAddNewBook = false;
 });
 
 submitFormBtn.addEventListener("click", () => {
@@ -217,19 +249,50 @@ submitFormBtn.addEventListener("click", () => {
     authorFormInput.value, 
     pagesTotalFormInput.value, 
     pagesReadFormInput.value);
-  
+
   if (isValid) {
-    let bookProgress = 100* Math.round(parseInt(10* pagesReadFormInput.value)/parseInt(pagesTotalFormInput.value))/10;
+    let bookProgress = 100* Math.round(1000*parseInt(pagesReadFormInput.value)/parseInt(pagesTotalFormInput.value))/1000;
 
-    addBookToLibrary(titleFormInput.value, 
-      authorFormInput.value, 
-      parseInt(pagesTotalFormInput.value), 
-      parseInt(pagesReadFormInput.value), 
-      bookProgress);
-    
-    addCard(titleFormInput.value, authorFormInput.value, bookProgress, myLibrary.length-1)
+    if (isAddNewBook) {
 
+      addBookToLibrary(titleFormInput.value, 
+        authorFormInput.value, 
+        parseInt(pagesTotalFormInput.value), 
+        parseInt(pagesReadFormInput.value), 
+        bookProgress);
+      
+      addCard(titleFormInput.value, authorFormInput.value, bookProgress, myLibrary.length-1)
+    }
+    else {
+      updateLibrary(titleFormInput.value, 
+        authorFormInput.value, 
+        pagesTotalFormInput.value, 
+        pagesReadFormInput.value, 
+        bookProgress);
+
+      updateCard(titleFormInput.value,
+        authorFormInput.value,
+        bookProgress);
+    }
     bookForm.reset();
     bookFormContainer.classList.add("display-none");
+    isAddNewBook = false;
+    indexBookBeingEdited = null;
   }
 });
+
+cardsGridContainer.addEventListener("click", e => {
+  /*If e.target = delete btn => ...*/
+  /*If e.target = read checkbox => ...*/
+  /*Else: */
+  let bookCard = e.target.closest(".book-card");
+  let bookIndex = parseInt(bookCard.getAttribute("data-book-index"));
+  
+  titleFormInput.value = myLibrary[bookIndex].title;
+  authorFormInput.value = myLibrary[bookIndex].author;
+  pagesReadFormInput.value = myLibrary[bookIndex].pagesRead;
+  pagesTotalFormInput.value = myLibrary[bookIndex].pagesTotal;
+
+  bookFormContainer.classList.remove("display-none");
+  indexBookBeingEdited = bookIndex;
+},true)
