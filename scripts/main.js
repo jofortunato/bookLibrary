@@ -271,6 +271,9 @@ submitFormBtn.addEventListener("click", () => {
         parseInt(pagesReadFormInput.value), 
         bookProgress);
       
+      if (myLibrary.length === 1) {
+        document.getElementById("lib-empty").remove();
+      }
       addCard(titleFormInput.value, authorFormInput.value, bookProgress, myLibrary.length-1)
     }
     else {
@@ -294,7 +297,7 @@ submitFormBtn.addEventListener("click", () => {
 cardsGridContainer.addEventListener("click", e => {
   let bookCard = e.target.closest(".book-card");
   let bookIndex = parseInt(bookCard.getAttribute("data-book-index"));
-  /*If e.target = delete btn => ...*/
+
   if (e.target.classList.contains("delete-book")) {
     deleteBook(bookIndex);
   }
